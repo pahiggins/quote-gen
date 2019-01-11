@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Header = () => {
-  return <h1>Opinionated Parlance...</h1>;
+const Header = ({ className }) => {
+  return <h1 className={className} >Opinionated Parlance...</h1>;
 };
 
-export default Header;
+const StyledHeader = styled(Header)`
+  background-color: red;
+`;
+
+export default StyledHeader;

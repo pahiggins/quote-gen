@@ -1,33 +1,65 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+
 import './App.css';
-import Header from './components/Header';
+import StyledHeader from './components/Header';
 import QuoteGen from './components/QuoteGen';
 import Quote from './components/Quote';
 import quotes from './data/quotes.json';
 
-class App extends Component {
-  state = {
-    quoteIndex: 0,
-  };
+// class App extends Component {
+//   state = {
+//     quoteIndex: 0,
+//     generatingQuotes: false,
+//   };
 
-  changeQuote = () => {
-    this.setState({
-      quoteIndex: Math.floor(Math.random() * quotes.length),
-    });
-  };
+//   changeQuote = () => {
+//     this.setState({
+//       quoteIndex: Math.floor(Math.random() * quotes.length),
+//     });
+//   };
 
-  render() {
-    const { quoteIndex } = this.state;
-    const selectedQuote = quotes[quoteIndex];
+//   generateQuote = () => {
+//     setInterval(this.changeQuote, 2000);
+//     this.setState({ generatingQuotes: true });
+//   };
 
-    return (
-      <div className="App">
-        <Header />
-        <QuoteGen changeQuote={this.changeQuote} />
-        <Quote quote={selectedQuote} />
-      </div>
-    );
+//   render() {
+//     const { quoteIndex, generatingQuotes } = this.state;
+//     const selectedQuote = quotes[quoteIndex];
+
+//     return (
+//       <div className="App">
+//         <StyledHeader />
+//         <QuoteGen onClick={this.changeQuote} text='Quote me...' />
+//         <QuoteGen onClick={this.generateQuote} disabled={generatingQuotes} text='Generate' />
+//         <Quote quote={selectedQuote} />
+//       </div>
+//     );
+//   }
+// }
+
+function App() {
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [generatingQuotes, setGeneratingQuotes] = useState(false);
+  const selectedQuote = quotes[quoteIndex];
+
+  function changeQuote() {
+    setQuoteIndex(Math.floor(Math.random() * quotes.length));
   }
+
+  function generateQuote() {
+    setInterval(changeQuote, 2000);
+    setGeneratingQuotes(true);
+  }
+
+  return (
+    <div className="App">
+      <StyledHeader />
+      <QuoteGen onClick={changeQuote} text='Quote me...' />
+      <QuoteGen onClick={generateQuote} disabled={generatingQuotes} text='Generate' />
+      <Quote quote={selectedQuote} />
+    </div>
+  );
 }
 
 export default App;
