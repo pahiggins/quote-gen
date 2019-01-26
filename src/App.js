@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import StyledHeader from './components/Header';
-import QuoteGen from './components/QuoteGen';
-import Quote from './components/Quote';
+// import StyledHeader from './components/Header';
+import Header from './blocks/Header';
+// import QuoteGen from './components/QuoteGen';
+// import Quote from './components/Quote';
 import quotes from './data/quotes.json';
 
 // class App extends Component {
@@ -54,10 +55,14 @@ function App() {
 
   return (
     <div className="App">
-      <StyledHeader />
-      <QuoteGen onClick={changeQuote} text='Quote me...' />
+      <Header>
+        <Header.Title>
+          Quote Generator
+        </Header.Title>
+      </Header>
+      {/* <QuoteGen onClick={changeQuote} text='Quote me...' />
       <QuoteGen onClick={generateQuote} disabled={generatingQuotes} text='Generate' />
-      <Quote quote={selectedQuote} />
+      <Quote quote={selectedQuote} /> */}
     </div>
   );
 }
